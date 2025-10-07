@@ -6,6 +6,7 @@ import java.net.Socket;
 import rs.ac.bg.fon.poslasticarnica.Administrator;
 
 public class Session {
+	
 	private static Session instance;
 	private Socket socket;
 	private Administrator ulogovani;
