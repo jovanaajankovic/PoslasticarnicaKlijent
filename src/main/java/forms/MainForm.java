@@ -15,18 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.ClientController;
-import form_administrator.FormNoviAdministrator;
-import form_administrator.FormPretragaAdministratora;
 import form_poslastica.FormNovaPoslastica;
-import form_poslastica.FormPretragaPoslastice;
-import form_racun.FormPretragaRacuna;
-import form_tip_poslastice.FormNoviTipPoslastice;
-import form_tip_poslastice.FormPretragaTipaPoslastice;
 import models.TableModelStavke;
 import rs.ac.bg.fon.poslasticarnica.Administrator;
 import rs.ac.bg.fon.poslasticarnica.Poslastica;
 import rs.ac.bg.fon.poslasticarnica.Racun;
 import rs.ac.bg.fon.poslasticarnica.StavkaRacuna;
+import rs.ac.bg.fon.poslasticarnica.TipPoslastice;
 import session.Session;
 
 import javax.swing.JMenuBar;
@@ -46,12 +41,12 @@ public class MainForm extends JFrame {
 	    private JTable tblStavke;
 	    private JTextField txtKolicina;
 	    private JTextField txtCenaStavke;
-	    private JComboBox cmbPoslastica;
+	    private JComboBox<Poslastica> cmbPoslastica;
 	    private JLabel lblUlogovani;
 	    private JLabel lblCena;
 	    private JButton btnDodaj, btnObrisi, btnSacuvaj, btnOdjava;
 	    private JMenuItem miNoviAdmin, miPretragaAdmina, miNoviTip, miPretragaTipa,
-	            miNovaPoslastica, miPretragaPoslastice, miPretragaRacuna, miOdjava;
+	            miNovaPoslastica, miPretragaPoslastice, miPretragaRacuna;
 	    private Administrator ulogovani;
 	    private double cena;
 
@@ -104,7 +99,7 @@ public class MainForm extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblUlogovani = new JLabel("Ulogovani:");
-		lblUlogovani.setBounds(10, 29, 74, 18);
+		lblUlogovani.setBounds(24, 38, 327, 18);
 		contentPane.add(lblUlogovani);
 		
 		tblStavke = new JTable();
@@ -193,44 +188,11 @@ public class MainForm extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
-        JMenu jMenu6 = new JMenu("Administrator");
-        menuBar.add(jMenu6);
-        miNoviAdmin = new JMenuItem("Novi admin");
-        miNoviAdmin.addActionListener(e -> new FormNoviAdministrator(this, true).setVisible(true));
-        jMenu6.add(miNoviAdmin);
-        miPretragaAdmina = new JMenuItem("Pretraga admina");
-        miPretragaAdmina.addActionListener(e -> new FormPretragaAdministratora(this, true).setVisible(true));
-        jMenu6.add(miPretragaAdmina);
-
-        JMenu jMenu9 = new JMenu("Tip poslastice");
-        menuBar.add(jMenu9);
-        miNoviTip = new JMenuItem("Novi tip poslastice");
-        miNoviTip.addActionListener(e -> new FormNoviTipPoslastice(this, true).setVisible(true));
-        jMenu9.add(miNoviTip);
-        miPretragaTipa = new JMenuItem("Pretraga tipa poslastice");
-        miPretragaTipa.addActionListener(e -> new FormPretragaTipaPoslastice(this, true).setVisible(true));
-        jMenu9.add(miPretragaTipa);
-
         JMenu jMenu7 = new JMenu("Poslastica");
         menuBar.add(jMenu7);
         miNovaPoslastica = new JMenuItem("Nova poslastica");
         miNovaPoslastica.addActionListener(e -> new FormNovaPoslastica(this, true).setVisible(true));
         jMenu7.add(miNovaPoslastica);
-        miPretragaPoslastice = new JMenuItem("Pretraga poslastice");
-        miPretragaPoslastice.addActionListener(e -> new FormPretragaPoslastice(this, true).setVisible(true));
-        jMenu7.add(miPretragaPoslastice);
-
-        JMenu jMenu10 = new JMenu("Racun");
-        menuBar.add(jMenu10);
-        miPretragaRacuna = new JMenuItem("Pretraga racuna");
-        miPretragaRacuna.addActionListener(e -> new FormPretragaRacuna(this, true).setVisible(true));
-        jMenu10.add(miPretragaRacuna);
-
-        JMenu jMenu8 = new JMenu("Odjava");
-        menuBar.add(jMenu8);
-        miOdjava = new JMenuItem("Odjavi se");
-        miOdjava.addActionListener(e -> odjava());
-        jMenu8.add(miOdjava);
     }
 
     private void updateCenaStavke() {
@@ -315,6 +277,11 @@ public class MainForm extends JFrame {
             ArrayList<Poslastica> poslastice = ClientController.getInstance().getAllPoslastica(null);
             cmbPoslastica.removeAllItems();
             for (Poslastica poslastica : poslastice) {
+                // poslastica.getTipPoslastice() NE sme biti null
+                if (poslastica.getTipPoslastice() == null) {
+                    // Ako je tip null, preskoči tu poslasticu ili prikupi sve tipove iz baze
+                    continue;
+                }
                 cmbPoslastica.addItem(poslastica);
             }
         } catch (Exception ex) {
