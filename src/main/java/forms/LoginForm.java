@@ -48,7 +48,7 @@ public class LoginForm extends JFrame {
 		setTitle("Login forma");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 346, 252);
+		setBounds(100, 100, 299, 205);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -83,24 +83,24 @@ public class LoginForm extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					 String username = txtUsername.getText().trim();
-					    String password = new String(txtPassword.getPassword()).trim();
+					String username = txtUsername.getText().trim();
+					String password = new String(txtPassword.getPassword()).trim();
 
-					    if (username.isEmpty() || password.isEmpty()) {
-					        JOptionPane.showMessageDialog(LoginForm.this,
-					                "Korisničko ime i lozinka moraju biti popunjeni!");
-					        return;
-					    }
+					if (username.isEmpty() || password.isEmpty()) {
+						JOptionPane.showMessageDialog(LoginForm.this,
+								"Korisnicko ime i lozinka moraju biti popunjeni!");
+						return;
+					}
 
-					    Administrator a = new Administrator();
-					    a.setUsername(username);
-					    a.setPassword(password);
+					Administrator a = new Administrator();
+					a.setUsername(username);
+					a.setPassword(password);
 
-					    Administrator administrator = ClientController.getInstance().login(a);
-					    Session.getInstance().setUlogovani(administrator);
+					Administrator administrator = ClientController.getInstance().login(a);
+					Session.getInstance().setUlogovani(administrator);
 
-					    new MainForm().setVisible(true);
-					    dispose();
+					new MainForm().setVisible(true);
+					dispose();
 
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(LoginForm.this, ex.getMessage());
