@@ -70,7 +70,7 @@ public class MainForm extends JFrame {
 				izvrsiOdjavu();
 			}
 		});
-		setBounds(100, 100, 727, 470);
+		setBounds(100, 100, 849, 555);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,7 +91,7 @@ public class MainForm extends JFrame {
 		contentPane.add(lblUlogovani);
 
 		btnOdjava = new JButton("Odjava");
-		btnOdjava.setBounds(480, 66, 84, 20);
+		btnOdjava.setBounds(569, 66, 84, 20);
 		btnOdjava.addActionListener(this::btnOdjavaActionPerformed);
 		contentPane.add(btnOdjava);
 
@@ -116,7 +116,7 @@ public class MainForm extends JFrame {
 			}
 		});
 		cmbPoslastica.addItemListener(this::cmbPoslasticaItemStateChanged);
-		cmbPoslastica.setBounds(511, 138, 153, 20);
+		cmbPoslastica.setBounds(511, 138, 303, 20);
 		contentPane.add(cmbPoslastica);
 
 		txtKolicina = new JTextField();
@@ -125,35 +125,35 @@ public class MainForm extends JFrame {
 				txtKolicinaKeyReleased(e);
 			}
 		});
-		txtKolicina.setBounds(511, 179, 153, 18);
+		txtKolicina.setBounds(511, 179, 303, 18);
 		contentPane.add(txtKolicina);
 		txtKolicina.setColumns(10);
 
-		txtCenaStavke.setBounds(511, 226, 153, 18);
+		txtCenaStavke.setBounds(511, 226, 303, 18);
 		contentPane.add(txtCenaStavke);
 		txtCenaStavke.setColumns(10);
 
 		JButton btnDodaj = new JButton("Dodaj stavku");
 		btnDodaj.addActionListener(this::btnDodajActionPerformed);
-		btnDodaj.setBounds(456, 269, 208, 20);
+		btnDodaj.setBounds(456, 269, 358, 20);
 		contentPane.add(btnDodaj);
 
 		JButton btnObrisi = new JButton("Obrisi stavku");
 		btnObrisi.addActionListener(this::btnObrisiActionPerformed);
-		btnObrisi.setBounds(456, 308, 208, 20);
+		btnObrisi.setBounds(456, 308, 358, 20);
 		contentPane.add(btnObrisi);
 
 		JLabel jLabel1 = new JLabel("Cena:");
-		jLabel1.setBounds(111, 356, 84, 21);
+		jLabel1.setBounds(235, 356, 84, 21);
 		contentPane.add(jLabel1);
 
 		lblCena = new JLabel("0.00");
-		lblCena.setBounds(246, 356, 143, 21);
+		lblCena.setBounds(510, 356, 143, 21);
 		contentPane.add(lblCena);
 
 		btnSacuvaj = new JButton("Sacuvaj racun");
 		btnSacuvaj.addActionListener(this::btnSacuvajActionPerformed);
-		btnSacuvaj.setBounds(121, 387, 218, 20);
+		btnSacuvaj.setBounds(296, 426, 268, 64);
 		contentPane.add(btnSacuvaj);
 
 	}
